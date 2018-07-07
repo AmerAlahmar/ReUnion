@@ -14,7 +14,7 @@ import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.ConversationAdapter;
 
 public class ConversationsActivity extends AppCompatActivity implements ConversationAdapter.ConversationClickListener {
-
+    String var = "hello";
     private static final String TAG = ConversationsActivity.class.getSimpleName();
 
     RecyclerView recyclerView;
