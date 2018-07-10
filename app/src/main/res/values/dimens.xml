@@ -15,8 +15,6 @@
     <dimen name="primarySpacingExtra">8sp</dimen>
     <dimen name="secondarySpacingExtra">6sp</dimen>
     <dimen name="secondaryTextSize">14sp</dimen>
-    <dimen name="messageItemLayoutPadding">12dp</dimen>
-    <dimen name="messageItemLayoutMargin">12dp</dimen>
     <dimen name="activityLoginEmailEditTextBottomMargin">16dp</dimen>
     <dimen name="activityLoginPasswordEditTextBottomMargin">31dp</dimen>
     <dimen name="activityLoginLogoBottomMargin">42dp</dimen>

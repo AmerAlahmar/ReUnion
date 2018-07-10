@@ -15,14 +15,14 @@
         <item name="android:textSize">@dimen/secondaryTextSize</item>
     </style>
 
-    <style name="LoginWidgetEditText"> <!--parent mean override from this parent-->
+    <style name="loginWidgetEditTextStyle">
         <!--to change the color of the bottom bar when pressed-->
         <item name="colorControlActivated">@color/colorAccent</item>
         <!--to set the color of the text when in normal state-->
         <item name="colorControlNormal">@color/colorEditTextHint</item>
     </style>
 
-    <style name="LoginEditText"> <!--parent mean override from this parent-->
+    <style name="loginEditTextStyle">
         <!--color of the text when type-->
         <item name="android:textColor">@android:color/white</item>
         <!--to change the color of hint text-->
@@ -31,10 +31,26 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="ButtonStyle">
+    <style name="loginButtonStyle">
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/secondaryTextSize</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="messagingWidgetEditTextStyle">
+        <!--to change the color of the bottom bar when pressed-->
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <!--to set the color of the text when in normal state-->
+        <item name="colorControlNormal">@color/colorLightGray</item>
+    </style>
+
+    <style name="messagingEditTextStyle">
+        <!--color of the text when type-->
+        <item name="android:textColor">@android:color/black</item>
+        <!--to change the color of hint text-->
+        <item name="android:textColorHint">@color/colorLightGray</item>
+        <item name="android:textSize">@dimen/PrimaryTextSize</item>
         <item name="android:textStyle">normal</item>
     </style>
 

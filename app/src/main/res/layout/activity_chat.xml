@@ -21,15 +21,24 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/messageAppCompatEditText"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activityChatMessagingEditTextMargin"
             android:layout_marginStart="@dimen/activityChatMessagingEditTextMargin"
             android:layout_weight="1"
-            android:inputType="textShortMessage"
-            app:backgroundTint="@color/colorAccent" />
+            android:theme="@style/messagingWidgetEditTextStyle"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/messageAppCompatEditText"
+                style="@style/messagingEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/messagingEditTextHint"
+                android:inputType="textShortMessage" />
+        </android.support.design.widget.TextInputLayout>
 
         <ImageButton
             android:id="@+id/sendButton"
@@ -41,6 +50,6 @@
             android:elevation="@dimen/activityChatSendButtonElevation"
             android:scaleType="fitXY"
             android:src="@drawable/send_arrow" />
-        <!--TODO: Override resources in layout-v21 after every thing is ready to fix the elevation -->
+        <!--TODO: Override resources in layout-v21 after every thing is ready, to fix the elevation -->
     </LinearLayout>
 </LinearLayout>

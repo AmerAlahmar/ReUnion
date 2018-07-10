@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">ReUnion</string>
     <string name="menu_people">People</string>
-    <string name="hello">Hello World!</string>
-    <string name="chatActivityStarterTitle">Chat With</string>
-    <string name="opponentUserEmptyError">Unexpected Error!!..</string>
     <string name="missingLastMessageReplacerText">Write something to start a conversation!</string>
     <string name="sendMessageButtonDescription">Send Message Button</string>
     <string name="loginEmailHint">Email</string>
@@ -18,4 +15,5 @@
     <string name="loginActivityNotValidPasswordError">Must be 6 characters or more</string>
     <string name="loginActivityNoConnectionError">Check internet connection!</string>
     <string name="loginActivityBadCredentialsError">Bad credentials!</string>
+    <string name="messagingEditTextHint">Start typing…</string>
 </resources>
