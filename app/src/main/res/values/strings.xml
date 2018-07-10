@@ -2,6 +2,9 @@
     <string name="app_name">ReUnion</string>
     <string name="menu_people">People</string>
     <string name="hello">Hello World!</string>
+    <string name="EmailEditTextHint">Email</string>
+    <string name="PasswordEditTextHint">Password</string>
+    <string name="LoginButtonText">Log In</string>
     <string name="chatActivityStarterTitle">Chat With</string>
     <string name="opponentUserEmptyError">Unexpected Error!!..</string>
     <string name="missingLastMessageReplacerText">Write something to start a conversation!</string>

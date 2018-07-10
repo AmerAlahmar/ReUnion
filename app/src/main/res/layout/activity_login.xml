@@ -63,5 +63,3 @@
         android:layout_height="wrap_content"
         android:text="@string/loginButtonText"/>
 </LinearLayout>
-
-
