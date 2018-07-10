@@ -9,7 +9,13 @@
     <string name="loginEmailHint">Email</string>
     <string name="loginPasswordHint">Password</string>
     <string name="loginButtonText">Log In</string>
-    <string name="splashScreenImageDescription">Re:Union Splash Screen</string>
+    <string name="logoImageDescription">ReUnion logo</string>
     <string name="conversationActivityLabel">Conversations</string>
     <string name="usersActivityLabel">People</string>
+    <string name="loginActivityEmptyEmailError">Email can\'t be empty</string>
+    <string name="loginActivityNotValidEmailError">Invalid Email</string>
+    <string name="loginActivityEmptyPasswordError">Password can\'t be Empty</string>
+    <string name="loginActivityNotValidPasswordError">Must be 6 characters or more</string>
+    <string name="loginActivityNoConnectionError">Check internet connection!</string>
+    <string name="loginActivityBadCredentialsError">Bad credentials!</string>
 </resources>

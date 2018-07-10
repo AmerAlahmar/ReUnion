@@ -1,37 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activityLoginLayoutPadding"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/activityLoginLayoutPadding"
+    android:paddingStart="@dimen/activityLoginLayoutPadding"
     tools:context=".activity.LoginActivity">
 
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:layout_marginBottom="@dimen/activityLoginLogoBottomMargin"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/logoImageDescription"
+        android:src="@drawable/logo" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activityLoginEmailEditTextBottomMargin"
+        android:theme="@style/LoginWidgetEditText"
+        app:hintEnabled="false">
 
         <EditText
             android:id="@+id/emailEdit"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/loginEmailHint"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="60"
+            android:maxLines="1"
+            tools:text="crazy_boy34" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/LoginWidgetEditText"
+        android:layout_marginBottom="@dimen/activityLoginPasswordEditTextBottomMargin"
+        app:hintEnabled="false">
 
         <EditText
             android:id="@+id/passwordEdit"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="24"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/loginButtonText"/>
-    </LinearLayout>
+    <Button
+        android:id="@+id/loginButton"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/loginButtonText"/>
+</LinearLayout>
 
-</RelativeLayout>
+

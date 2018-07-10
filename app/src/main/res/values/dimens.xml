@@ -5,7 +5,7 @@
     <dimen name="activityChatSendButtonDimen">40dp</dimen>
     <dimen name="activityChatSendButtonMargin">12dp</dimen>
     <dimen name="activityChatSendButtonElevation">12dp</dimen>
-    <dimen name="activityLoginLayoutPadding">32dp</dimen>
+    <dimen name="activityLoginLayoutPadding">31dp</dimen>
     <dimen name="activitySplashLayoutPadding">30dp</dimen>
     <dimen name="conversationAndUserItemLayoutPadding">16dp</dimen>
     <dimen name="conversationAndUserItemColoredCircleDimen">40dp</dimen>
@@ -17,4 +17,7 @@
     <dimen name="secondaryTextSize">14sp</dimen>
     <dimen name="messageItemLayoutPadding">12dp</dimen>
     <dimen name="messageItemLayoutMargin">12dp</dimen>
+    <dimen name="activityLoginEmailEditTextBottomMargin">16dp</dimen>
+    <dimen name="activityLoginPasswordEditTextBottomMargin">31dp</dimen>
+    <dimen name="activityLoginLogoBottomMargin">42dp</dimen>
 </resources>
