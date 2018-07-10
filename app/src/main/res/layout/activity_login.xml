@@ -23,12 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activityLoginEmailEditTextBottomMargin"
-        android:theme="@style/LoginWidgetEditText"
+        android:theme="@style/loginWidgetEditTextStyle"
         app:hintEnabled="false">
 
         <EditText
             android:id="@+id/emailEdit"
-            style="@style/LoginEditText"
+            style="@style/loginEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/loginEmailHint"
@@ -41,13 +41,13 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/LoginWidgetEditText"
         android:layout_marginBottom="@dimen/activityLoginPasswordEditTextBottomMargin"
+        android:theme="@style/loginWidgetEditTextStyle"
         app:hintEnabled="false">
 
         <EditText
             android:id="@+id/passwordEdit"
-            style="@style/LoginEditText"
+            style="@style/loginEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
@@ -58,8 +58,8 @@
 
     <Button
         android:id="@+id/loginButton"
-        style="@style/ButtonStyle"
+        style="@style/loginButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loginButtonText"/>
+        android:text="@string/loginButtonText" />
 </LinearLayout>

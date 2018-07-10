@@ -17,12 +17,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //I have added the 21 and 22 lines to remove the status bar
+        //Remove Bar completely:
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash);
-
         configureFirestore();
     }
 
@@ -38,7 +35,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             navigateToLoginDelayed(DELAYMILLISECONDS);
         } else {

@@ -29,7 +29,6 @@ public class FirestoreHelper {
         String myId = FirebaseAuth
                 .getInstance()
                 .getUid();
-
         if (myId != null) {
             return getUsers()
                     .document(myId);
@@ -54,7 +53,6 @@ public class FirestoreHelper {
                             ArrayList<DocumentReference> participants = new ArrayList<>();
                             participants.add(getMe());
                             participants.add(opponentRef);
-
                             final Conversation conversation = new Conversation();
                             conversation.setParticipants(participants);
                             getConversations()
@@ -86,7 +84,7 @@ public class FirestoreHelper {
                             if (conversation != null) {
                                 conversation.setId(snapshot.getId());
                                 callback.onCompleted(getConversationRef(conversation));
-                            }else {
+                            } else {
                                 Log.e(TAG, "findOrCreateConversation: Error Couldn't find or create Conversation!!");
                             }
                         }
@@ -99,7 +97,6 @@ public class FirestoreHelper {
         message.setText(messageText);
         message.setFrom(getMe());
         message.setConversation(conversationRef);
-
         FirebaseFirestore.getInstance()
                 .collection("messages")
                 .add(message)
@@ -132,7 +129,7 @@ public class FirestoreHelper {
         return getConversations().document(conversation.getId());
     }
 
-    public static DocumentReference getConversationRefById(String conversationId){
+    public static DocumentReference getConversationRefById(String conversationId) {
         return getConversations().document(conversationId);
     }
 

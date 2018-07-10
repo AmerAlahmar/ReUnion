@@ -7,17 +7,13 @@
     android:orientation="horizontal"
     android:padding="@dimen/conversationAndUserItemLayoutPadding">
 
-    <TextView
-        android:id="@+id/coloredCircleText"
+    <ImageView
+        android:id="@+id/coloredCircleImageView"
         android:layout_width="@dimen/conversationAndUserItemColoredCircleDimen"
         android:layout_height="@dimen/conversationAndUserItemColoredCircleDimen"
         android:layout_marginEnd="@dimen/conversationAndUserItemColoredCircleMargin"
         android:layout_marginRight="@dimen/conversationAndUserItemColoredCircleMargin"
-        android:background="@drawable/colored_circle_bg"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/conversationAndUserItemColoredCircleTextSize"
-        tools:text="A" />
+        android:contentDescription="@string/coloredCircleImageViewDescription" />
 
     <LinearLayout
         android:layout_width="match_parent"
