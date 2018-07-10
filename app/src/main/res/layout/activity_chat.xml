@@ -31,7 +31,7 @@
             app:hintEnabled="false">
 
             <EditText
-                android:id="@+id/messageAppCompatEditText"
+                android:id="@+id/messageEditText"
                 style="@style/messagingEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <ImageButton
-            android:id="@+id/sendButton"
+            android:id="@+id/sendMessageImageButton"
             android:layout_width="@dimen/activityChatSendButtonDimen"
             android:layout_height="@dimen/activityChatSendButtonDimen"
             android:layout_margin="@dimen/activityChatSendButtonMargin"
