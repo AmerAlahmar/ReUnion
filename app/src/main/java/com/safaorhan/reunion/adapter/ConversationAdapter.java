@@ -51,7 +51,8 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
     public static ConversationAdapter get() {
         Query query = FirebaseFirestore.getInstance()
                 .collection("conversations")
-                //.orderBy("timestamp")
+                //.orderBy()
+                .whereEqualTo(FirestoreHelper.getMe().getId(), true)
                 .limit(50);
         FirestoreRecyclerOptions<Conversation> options = new FirestoreRecyclerOptions.Builder<Conversation>()
                 .setQuery(query, Conversation.class)
@@ -77,6 +78,7 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
         TextView opponentNameText;
         TextView lastMessageText;
         ImageView coloredCircleImageView;
+
         private User opponentUser = null;
         private Message lastMessage = null;
         String userFirstLetter;
@@ -93,6 +95,7 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
         }
 
         private void bind(final Conversation conversation) {
+            itemView.setVisibility(View.GONE);
             if (opponentUser == null) {
                 conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -103,11 +106,13 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
                         userEmail = opponentUser.getEmail();
                         coloredCircleDrawable = TextDrawable.builder().buildRound(userFirstLetter, colorGenerator.getColor(userEmail));
                         coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
+                        itemView.setVisibility(View.VISIBLE);
                     }
                 });
             } else {
                 opponentNameText.setText(opponentUser.getName());
                 coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
+                itemView.setVisibility(View.VISIBLE);
             }
             if (lastMessage == null) {
                 if (conversation.getLastMessage() != null) {

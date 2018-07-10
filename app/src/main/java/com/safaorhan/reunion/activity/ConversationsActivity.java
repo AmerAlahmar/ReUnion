@@ -17,7 +17,7 @@ import com.safaorhan.reunion.model.Conversation;
 public class ConversationsActivity extends AppCompatActivity implements ConversationAdapter.ConversationClickListener {
     RecyclerView recyclerView;
     ConversationAdapter conversationAdapter;
-
+    //TODO: For future update:: ADD progress par. for this activity and user activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,6 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(conversationAdapter);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
