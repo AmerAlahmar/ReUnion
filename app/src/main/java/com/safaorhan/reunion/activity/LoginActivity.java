@@ -16,19 +16,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.safaorhan.reunion.R;
 
 public class LoginActivity extends AppCompatActivity {
-
     private static final int PASSWORD_MIN_LENGTH = 6;
     EditText emailEdit;
     EditText passwordEdit;
     Button loginButton;
-
     boolean isTryingToLogin = false;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -37,28 +34,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
         emailEdit = findViewById(R.id.emailEdit);
         passwordEdit = findViewById(R.id.passwordEdit);
         loginButton = findViewById(R.id.loginButton);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NetworkInfo networkInfo = getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()){
+                if (networkInfo != null && networkInfo.isConnected()) {
                     Boolean emailValidation = isEmailValid(emailEdit);
                     Boolean passwValidation = isPasswValid(passwordEdit);
                     if (emailValidation && passwValidation)
                         if (!isTryingToLogin) {
                             tryToLogIn();
                         }
-                }else {
+                } else {
                     Toast.makeText(LoginActivity.this, getString(R.string.loginActivityNoConnectionError), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         emailEdit.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -66,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         passwordEdit.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -81,12 +74,10 @@ public class LoginActivity extends AppCompatActivity {
             editText.setError(getString(R.string.loginActivityEmptyPasswordError));
             return false;
         }
-
         if (editText.getText().length() < PASSWORD_MIN_LENGTH) {
             editText.setError(getString(R.string.loginActivityNotValidPasswordError));
             return false;
         }
-
         return true;
     }
 
@@ -129,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             return connectivityManager.getActiveNetworkInfo();
-        }else{
+        } else {
             return null;
         }
     }

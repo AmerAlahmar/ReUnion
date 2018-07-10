@@ -1,15 +1,16 @@
 package com.safaorhan.reunion.adapter;
 
-import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,12 +27,10 @@ import com.safaorhan.reunion.model.User;
 public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, ConversationAdapter.ConversationHolder> {
     private static final String TAG = ConversationAdapter.class.getSimpleName();
     private ConversationClickListener conversationClickListener;
-    private Context context = null;
 
     private ConversationAdapter(@NonNull FirestoreRecyclerOptions<Conversation> options) {
         super(options);
     }
-
 
     private ConversationClickListener getConversationClickListener() {
         if (conversationClickListener == null) {
@@ -42,7 +41,6 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
                 }
             };
         }
-
         return conversationClickListener;
     }
 
@@ -50,24 +48,14 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
         this.conversationClickListener = conversationClickListener;
     }
 
-    private Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public static ConversationAdapter get() {
         Query query = FirebaseFirestore.getInstance()
                 .collection("conversations")
                 //.orderBy("timestamp")
                 .limit(50);
-
         FirestoreRecyclerOptions<Conversation> options = new FirestoreRecyclerOptions.Builder<Conversation>()
                 .setQuery(query, Conversation.class)
                 .build();
-
         return new ConversationAdapter(options);
     }
 
@@ -85,24 +73,23 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
     }
 
     class ConversationHolder extends RecyclerView.ViewHolder {
-
         View itemView;
         TextView opponentNameText;
         TextView lastMessageText;
-        TextView coloredCircleText;
-        GradientDrawable coloredCircleDrawable;
+        ImageView coloredCircleImageView;
         private User opponentUser = null;
         private Message lastMessage = null;
-        private DocumentSnapshot opponentDS = null;
-
+        String userFirstLetter;
+        String userEmail;
+        ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
+        TextDrawable coloredCircleDrawable;
 
         ConversationHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             opponentNameText = itemView.findViewById(R.id.opponentNameText);
             lastMessageText = itemView.findViewById(R.id.lastMessageText);
-            coloredCircleText = itemView.findViewById(R.id.coloredCircleText);
-            coloredCircleDrawable = (GradientDrawable) coloredCircleText.getBackground();
+            coloredCircleImageView = itemView.findViewById(R.id.coloredCircleImageView);
         }
 
         private void bind(final Conversation conversation) {
@@ -110,21 +97,17 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
                 conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        opponentDS = documentSnapshot;
                         opponentUser = documentSnapshot.toObject(User.class);
                         opponentNameText.setText(opponentUser != null ? opponentUser.getName() : null);
-                        coloredCircleText.setText(opponentUser.getName().substring(0, 1));
-                        if (getContext() != null) {
-                            //coloredCircleDrawable.setColor(ContextCompat.getColor(getContext(), getUserColor(opponentDS)));//TODO 2: Uncomment after applying todo 1.
-                        }
+                        userFirstLetter = opponentUser.getName().substring(0, 1).toUpperCase();
+                        userEmail = opponentUser.getEmail();
+                        coloredCircleDrawable = TextDrawable.builder().buildRound(userFirstLetter, colorGenerator.getColor(userEmail));
+                        coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
                     }
                 });
             } else {
                 opponentNameText.setText(opponentUser.getName());
-                coloredCircleText.setText(opponentUser.getName().substring(0, 1));
-                if (getContext() != null) {
-                    //coloredCircleDrawable.setColor(ContextCompat.getColor(getContext(), getUserColor(opponentDS)));//TODO 3: Uncomment after applying todo 2.
-                }
+                coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
             }
             if (lastMessage == null) {
                 if (conversation.getLastMessage() != null) {
@@ -141,18 +124,12 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
             } else {
                 lastMessageText.setText(lastMessage.getText());
             }
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getConversationClickListener().onConversationClick(FirestoreHelper.getConversationRef(conversation));
                 }
             });
-        }
-
-        private int getUserColor(DocumentSnapshot opponentDS) {
-            //TODO 1: return userColor AS int (ID).
-            return 0;
         }
     }
 

@@ -41,8 +41,8 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/loginWidgetEditTextStyle"
         android:layout_marginBottom="@dimen/activityLoginPasswordEditTextBottomMargin"
+        android:theme="@style/loginWidgetEditTextStyle"
         app:hintEnabled="false">
 
         <EditText
@@ -61,5 +61,5 @@
         style="@style/loginButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loginButtonText"/>
+        android:text="@string/loginButtonText" />
 </LinearLayout>

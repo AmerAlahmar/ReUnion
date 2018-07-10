@@ -1,15 +1,16 @@
 package com.safaorhan.reunion.adapter;
 
-import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +23,6 @@ import com.safaorhan.reunion.model.User;
 public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.UserHolder> {
     private static final String TAG = UserAdapter.class.getSimpleName();
     private UserClickListener userClickListener;
-    private Context context = null;
-
 
     private UserAdapter(@NonNull FirestoreRecyclerOptions<User> options) {
         super(options);
@@ -38,7 +37,6 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
                 }
             };
         }
-
         return userClickListener;
     }
 
@@ -46,23 +44,13 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         this.userClickListener = userClickListener;
     }
 
-    private Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public static UserAdapter get() {
         Query query = FirestoreHelper.getUsers()
                 //.orderBy("timestamp")
                 .limit(50);
-
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
                 .build();
-
         return new UserAdapter(options);
     }
 
@@ -80,31 +68,26 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
     }
 
     class UserHolder extends RecyclerView.ViewHolder {
-
         View itemView;
         TextView nameText;
         TextView emailText;
-        TextView coloredCircleText;
-        GradientDrawable coloredCircleDrawable;
+        ImageView coloredCircleImageView;
+        ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
+        TextDrawable coloredCircleDrawable;
 
         UserHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             nameText = itemView.findViewById(R.id.nameText);
             emailText = itemView.findViewById(R.id.emailText);
-            coloredCircleText = itemView.findViewById(R.id.coloredCircleText);
-            coloredCircleDrawable = (GradientDrawable) coloredCircleText.getBackground();
+            coloredCircleImageView = itemView.findViewById(R.id.coloredCircleImageView);
         }
 
         void bind(final User user) {
             nameText.setText(String.format("%s %s", user.getName(), user.getSurname()));
             emailText.setText(user.getEmail());
-            coloredCircleText.setText(user.getName().substring(0, 1));
-
-            if (getContext() != null){
-                //coloredCircleDrawable.setColor(ContextCompat.getColor(getContext(), getUserColor(user)));//TODO 2: Uncomment after applying todo 1.
-            }
-
+            coloredCircleDrawable = TextDrawable.builder().buildRound(user.getName().substring(0, 1).toUpperCase(), colorGenerator.getColor(user.getEmail()));
+            coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
             if (user.getId().equals(FirebaseAuth.getInstance().getUid())) {
                 itemView.setOnClickListener(null);
             } else {
@@ -115,11 +98,6 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
                     }
                 });
             }
-        }
-
-        private int getUserColor(User user) {
-            //TODO 1: return userColor AS int (ID).
-            return 0;
         }
     }
 

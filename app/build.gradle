@@ -29,7 +29,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:multidex:1.0.3'
 
-
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
@@ -50,6 +49,9 @@ dependencies {
 
     //Text input layout
     implementation 'com.android.support:design:27.1.1'
+
+    //TextDrawable library for colored circles
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

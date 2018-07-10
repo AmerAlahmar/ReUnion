@@ -2,6 +2,7 @@ package com.safaorhan.reunion.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
@@ -14,7 +15,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
         String conversationRefId = getIntent().getStringExtra(Conversation.CONVERSATION_KEY);
         conversationRef = FirestoreHelper.getConversationRefById(conversationRefId);
     }

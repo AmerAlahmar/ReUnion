@@ -8,15 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.ConversationAdapter;
+import com.safaorhan.reunion.model.Conversation;
 
 public class ConversationsActivity extends AppCompatActivity implements ConversationAdapter.ConversationClickListener {
-
-
     RecyclerView recyclerView;
     ConversationAdapter conversationAdapter;
 
@@ -24,13 +22,9 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversations);
-
         recyclerView = findViewById(R.id.recyclerView);
-
         conversationAdapter = ConversationAdapter.get();
         conversationAdapter.setConversationClickListener(this);
-        conversationAdapter.setContext(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(conversationAdapter);
     }
@@ -49,7 +43,9 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
 
     @Override
     public void onConversationClick(DocumentReference conversationRef) {
-        Toast.makeText(this, "U Clicked on me!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ConversationsActivity.this, ChatActivity.class);
+        intent.putExtra(Conversation.CONVERSATION_KEY, conversationRef.getId());
+        startActivity(intent);
     }
 
     @Override

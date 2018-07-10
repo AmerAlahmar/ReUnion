@@ -16,4 +16,5 @@
     <string name="loginActivityNoConnectionError">Check internet connection!</string>
     <string name="loginActivityBadCredentialsError">Bad credentials!</string>
     <string name="messagingEditTextHint">Start typing…</string>
+    <string name="coloredCircleImageViewDescription">Colored circle to identify the user</string>
 </resources>

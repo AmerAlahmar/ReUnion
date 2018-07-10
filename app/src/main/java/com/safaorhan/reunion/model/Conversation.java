@@ -2,6 +2,7 @@ package com.safaorhan.reunion.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+
 import java.util.List;
 
 public class Conversation {
@@ -37,13 +38,11 @@ public class Conversation {
     public DocumentReference getOpponent() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String myId = firebaseAuth.getUid();
-
         for (DocumentReference userRef : getParticipants()) {
             if (!userRef.getId().equals(myId)) {
                 return userRef;
             }
         }
-
         return null;
     }
 }
