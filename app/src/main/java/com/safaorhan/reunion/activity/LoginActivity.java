@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                             tryToLogIn();
                         }
                 } else {
-                    Toast.makeText(LoginActivity.this, getString(R.string.loginActivityNoConnectionError), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.noInternetConnectionError), Toast.LENGTH_SHORT).show();
                 }
             }
         });

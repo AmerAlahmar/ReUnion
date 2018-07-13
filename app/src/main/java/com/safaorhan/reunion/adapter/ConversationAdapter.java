@@ -1,5 +1,6 @@
 package com.safaorhan.reunion.adapter;
 
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,46 +19,44 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.model.Conversation;
 import com.safaorhan.reunion.model.Message;
 import com.safaorhan.reunion.model.User;
-
 public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, ConversationAdapter.ConversationHolder> {
     private static final String TAG = ConversationAdapter.class.getSimpleName();
     private ConversationClickListener conversationClickListener;
+    private DataChangedListener dataChangedListener;
 
-    private ConversationAdapter(@NonNull FirestoreRecyclerOptions<Conversation> options) {
+    private ConversationAdapter(@NonNull FirestoreRecyclerOptions<Conversation> options, ConversationClickListener conversationClickListener, final DataChangedListener dataChangedListener) {
         super(options);
+        setConversationClickListener(conversationClickListener);
+        setDataChangedListener(dataChangedListener);
+        FirebaseFirestore.getInstance()
+                .collection("conversations")
+                .whereEqualTo(FirestoreHelper.getMe().getId(), true)
+                .limit(1)
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot snapshots) {
+                if (snapshots == null || snapshots.isEmpty() || snapshots.size() < 1)
+                    getDataChangedListener().doWhenDataIsEmpty();
+            }
+        });
     }
 
-    private ConversationClickListener getConversationClickListener() {
-        if (conversationClickListener == null) {
-            conversationClickListener = new ConversationClickListener() {
-                @Override
-                public void onConversationClick(DocumentReference documentReference) {
-                    Log.e(TAG, "You need to call setConversationClickListener() to set the click listener of ConversationAdapter");
-                }
-            };
-        }
-        return conversationClickListener;
-    }
 
-    public void setConversationClickListener(ConversationClickListener conversationClickListener) {
-        this.conversationClickListener = conversationClickListener;
-    }
-
-    public static ConversationAdapter get() {
+    public static ConversationAdapter get(ConversationClickListener conversationClickListener, DataChangedListener dataChangedListener) {
         Query query = FirebaseFirestore.getInstance()
                 .collection("conversations")
-                //.orderBy()
                 .whereEqualTo(FirestoreHelper.getMe().getId(), true)
                 .limit(50);
         FirestoreRecyclerOptions<Conversation> options = new FirestoreRecyclerOptions.Builder<Conversation>()
                 .setQuery(query, Conversation.class)
                 .build();
-        return new ConversationAdapter(options);
+        return new ConversationAdapter(options, conversationClickListener, dataChangedListener);
     }
 
     @Override
@@ -73,19 +72,52 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
         return new ConversationHolder(itemView);
     }
 
+    private ConversationClickListener getConversationClickListener() {
+        if (conversationClickListener == null) {
+            conversationClickListener = new ConversationClickListener() {
+                @Override
+                public void onConversationClick(DocumentReference documentReference) {
+                    Log.e(TAG, "You need to call setConversationClickListener() to set the click listener of ConversationAdapter");
+                }
+            };
+        }
+        return conversationClickListener;
+    }
+
+    private void setConversationClickListener(ConversationClickListener conversationClickListener) {
+        this.conversationClickListener = conversationClickListener;
+    }
+
+    private DataChangedListener getDataChangedListener() {
+        if (dataChangedListener == null) {
+            dataChangedListener = new DataChangedListener() {
+                @Override
+                public void doWhenDataIsViable() {
+                    Log.e(TAG, "You need to call setDataChangedListener() to set the click listener of ConversationAdapter");
+                }
+                @Override
+                public void doWhenDataIsEmpty() {
+                }
+            };
+        }
+        return dataChangedListener;
+    }
+
+    private void setDataChangedListener(DataChangedListener dataChangedListener) {
+        this.dataChangedListener = dataChangedListener;
+    }
+
     class ConversationHolder extends RecyclerView.ViewHolder {
         View itemView;
         TextView opponentNameText;
         TextView lastMessageText;
         ImageView coloredCircleImageView;
-
         private User opponentUser = null;
         private Message lastMessage = null;
         String userFirstLetter;
         String userEmail;
         ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
         TextDrawable coloredCircleDrawable;
-
         ConversationHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
@@ -93,42 +125,42 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
             lastMessageText = itemView.findViewById(R.id.lastMessageText);
             coloredCircleImageView = itemView.findViewById(R.id.coloredCircleImageView);
         }
-
         private void bind(final Conversation conversation) {
             itemView.setVisibility(View.GONE);
-            if (opponentUser == null) {
-                conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        opponentUser = documentSnapshot.toObject(User.class);
-                        opponentNameText.setText(opponentUser != null ? opponentUser.getName() : null);
-                        userFirstLetter = opponentUser.getName().substring(0, 1).toUpperCase();
-                        userEmail = opponentUser.getEmail();
-                        coloredCircleDrawable = TextDrawable.builder().buildRound(userFirstLetter, colorGenerator.getColor(userEmail));
-                        coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
-                        itemView.setVisibility(View.VISIBLE);
-                    }
-                });
-            } else {
-                opponentNameText.setText(opponentUser.getName());
-                coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
-                itemView.setVisibility(View.VISIBLE);
-            }
-            if (lastMessage == null) {
-                if (conversation.getLastMessage() != null) {
-                    conversation.getLastMessage().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            lastMessage = documentSnapshot.toObject(Message.class);
-                            lastMessageText.setText(lastMessage != null ? lastMessage.getText() : null);
-                        }
-                    });
-                } else {
-                    lastMessageText.setText(R.string.missingLastMessageReplacerText);
+            if (conversation == null || conversation.getLastMessage() == null) {
+                if (conversation.getLastMessage() == null){
+                    FirebaseFirestore.getInstance().collection("conversations").document(conversation.getId()).delete();
                 }
-            } else {
-                lastMessageText.setText(lastMessage.getText());
+                return;
             }
+            conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        opponentUser = documentSnapshot.toObject(User.class);
+                        opponentUser.setId(documentSnapshot.getId());
+                        if (opponentUser != null && opponentUser.getId() != null && !opponentUser.getId().isEmpty()) {
+                            opponentNameText.setText(opponentUser.getName());
+                            userFirstLetter = opponentUser.getName().substring(0, 1).toUpperCase();
+                            userEmail = opponentUser.getEmail();
+                            coloredCircleDrawable = TextDrawable.builder().buildRound(userFirstLetter, colorGenerator.getColor(userEmail));
+                            coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
+                            conversation.getLastMessage().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    lastMessage = documentSnapshot.toObject(Message.class);
+                                    if (lastMessageText.getText() != null) {
+                                        lastMessageText.setText(lastMessage.getText());
+                                        itemView.setVisibility(View.VISIBLE);
+                                        getDataChangedListener().doWhenDataIsViable();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -140,5 +172,10 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
 
     public interface ConversationClickListener {
         void onConversationClick(DocumentReference conversationRef);
+    }
+
+    public interface DataChangedListener {
+        void doWhenDataIsViable();
+        void doWhenDataIsEmpty();
     }
 }

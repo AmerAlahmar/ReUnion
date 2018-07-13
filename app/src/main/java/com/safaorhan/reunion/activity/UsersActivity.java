@@ -11,6 +11,7 @@ import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.UserAdapter;
 import com.safaorhan.reunion.model.Conversation;
+import com.safaorhan.reunion.model.User;
 
 public class UsersActivity extends AppCompatActivity implements UserAdapter.UserClickListener {
     RecyclerView recyclerView;
@@ -44,8 +45,9 @@ public class UsersActivity extends AppCompatActivity implements UserAdapter.User
         FirestoreHelper.findOrCreateConversation(userRef, new FirestoreHelper.DocumentReferenceCallback() {
             @Override
             public void onCompleted(DocumentReference conversationRef) {
-                Intent intent = new Intent(UsersActivity.this, ChatActivity.class);
-                intent.putExtra(Conversation.CONVERSATION_KEY, conversationRef.getId());
+                Intent intent = new Intent(UsersActivity.this, MessageActivity.class);
+                intent.putExtra(Conversation.CONVERSATION_KEY, conversationRef.getPath());
+                intent.putExtra(User.OPPONENT_KEY, userRef.getPath());
                 startActivity(intent);
                 finish();
             }

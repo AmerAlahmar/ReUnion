@@ -13,8 +13,12 @@
     <string name="loginActivityNotValidEmailError">Invalid Email</string>
     <string name="loginActivityEmptyPasswordError">Password can\'t be Empty</string>
     <string name="loginActivityNotValidPasswordError">Must be 6 characters or more</string>
-    <string name="loginActivityNoConnectionError">Check internet connection!</string>
+    <string name="noInternetConnectionError">Check internet connection!</string>
     <string name="loginActivityBadCredentialsError">Bad credentials!</string>
     <string name="messagingEditTextHint">Start typing…</string>
     <string name="coloredCircleImageViewDescription">Colored circle to identify the user</string>
+    <string name="meIsMessageSender">You:</string>
+    <string name="userIsMessageSenderHeader">Chat with</string>
+    <string name="conversationActivityEmptyListError">Come on!\nYou haven\'t texted anyone yet!\nThere are some cool guys here !</string>
+    <string name="userActivityMeName">Awesome You</string>
 </resources>

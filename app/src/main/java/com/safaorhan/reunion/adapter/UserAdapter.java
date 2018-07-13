@@ -46,7 +46,6 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
 
     public static UserAdapter get() {
         Query query = FirestoreHelper.getUsers()
-                //.orderBy("timestamp")
                 .limit(50);
         FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
@@ -84,20 +83,27 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         }
 
         void bind(final User user) {
+            itemView.setVisibility(View.GONE);
+            if (user.getId().equals(FirebaseAuth.getInstance().getUid())) {
+                coloredCircleDrawable = TextDrawable.builder().buildRound(user.getName().substring(0, 1).toUpperCase(), colorGenerator.getColor(user.getEmail()));
+                coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
+                nameText.setText(R.string.userActivityMeName);
+                emailText.setText(user.getEmail());
+                itemView.setVisibility(View.VISIBLE);
+                return;
+            }
             nameText.setText(String.format("%s %s", user.getName(), user.getSurname()));
             emailText.setText(user.getEmail());
             coloredCircleDrawable = TextDrawable.builder().buildRound(user.getName().substring(0, 1).toUpperCase(), colorGenerator.getColor(user.getEmail()));
             coloredCircleImageView.setImageDrawable(coloredCircleDrawable);
-            if (user.getId().equals(FirebaseAuth.getInstance().getUid())) {
-                itemView.setOnClickListener(null);
-            } else {
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getUserClickListener().onUserClick(FirestoreHelper.getUserRef(user));
-                    }
-                });
-            }
+            itemView.setVisibility(View.VISIBLE);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getUserClickListener().onUserClick(FirestoreHelper.getUserRef(user));
+                }
+            });
+
         }
     }
 

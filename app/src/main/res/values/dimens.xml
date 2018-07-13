@@ -18,4 +18,6 @@
     <dimen name="activityLoginEmailEditTextBottomMargin">16dp</dimen>
     <dimen name="activityLoginPasswordEditTextBottomMargin">31dp</dimen>
     <dimen name="activityLoginLogoBottomMargin">42dp</dimen>
+    <dimen name="messageItemLayoutPadding">12dp</dimen>
+    <dimen name="messageItemLayoutMargin">12dp</dimen>
 </resources>
