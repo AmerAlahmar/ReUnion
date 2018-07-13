@@ -27,6 +27,6 @@
         <activity
             android:name=".activity.UsersActivity"
             android:label="@string/usersActivityLabel" />
-        <activity android:name=".activity.ChatActivity" />
+        <activity android:name=".activity.MessageActivity" />
     </application>
 </manifest>

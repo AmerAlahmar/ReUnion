@@ -1,6 +1,7 @@
 package com.safaorhan.reunion.model;
 
 public class User {
+    public static String OPPONENT_KEY = "OPPONENT";
     private String id;
     private String name;
     private String surname;

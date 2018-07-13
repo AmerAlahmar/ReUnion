@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/tile_background"
     android:orientation="vertical"
-    tools:context=".activity.ChatActivity">
+    tools:context=".activity.MessageActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messagingRecyclerView"
