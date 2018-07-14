@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -31,6 +32,7 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
                 .collection("messages")
                 .whereEqualTo("conversation", conversationRef)
                 .orderBy("sentAt");
+
         FirestoreRecyclerOptions<Message> options = new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
                 .build();
@@ -75,18 +77,21 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
         View itemView;
         TextView senderTextView;
         TextView messageTextView;
+        ImageView sentImageView;
+        ImageView deliveredImageView;
 
         MessageHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             senderTextView = itemView.findViewById(R.id.senderTextView);
             messageTextView = itemView.findViewById(R.id.messageTextView);
+            sentImageView = itemView.findViewById(R.id.sentImageView);
+            deliveredImageView = itemView.findViewById(R.id.deliveredImageView);
         }
 
         void bind(final Message message) {
             itemView.setVisibility(View.GONE);
-            if (message.getFrom() == null || message.getConversation() == null || message.getSentAt() == null || message.getText() == null) {
-                Log.e(TAG, "something is really really wrong.");
+            if (message.getFrom() == null || message.getConversation() == null) {
                 return;
             }
             messageTextView.setText(message.getText());
@@ -99,6 +104,18 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
                         senderTextView.setText(user.getName());
                     }
                 });
+            }
+            if (!message.getFrom().getId().equals(FirestoreHelper.getMe().getId())){
+                FirestoreHelper.messageDelivered(message, getSnapshots().getSnapshot(getAdapterPosition()).getId());
+                deliveredImageView.setVisibility(View.GONE);
+                sentImageView.setVisibility(View.GONE);
+            }else if (message.getFrom().getId().equals(FirestoreHelper.getMe().getId())){
+                if (message.getDelivered()){
+                    deliveredImageView.setVisibility(View.VISIBLE);
+                }else {
+                    deliveredImageView.setVisibility(View.GONE);
+                }
+                sentImageView.setVisibility(View.VISIBLE);
             }
             itemView.setVisibility(View.VISIBLE);
         }

@@ -16,6 +16,7 @@ import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.MessageAdapter;
 import com.safaorhan.reunion.model.Conversation;
+import com.safaorhan.reunion.model.Message;
 import com.safaorhan.reunion.model.User;
 
 public class MessageActivity extends AppCompatActivity implements MessageAdapter.DataChangingListener {
@@ -59,7 +60,6 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
                 @Override
                 public void onCompleted(User user) {
                     opponentUser = user;
-                    //messageAdapter.setUser(opponentUser);
                     setTitle(getString(R.string.userIsMessageSenderHeader).concat(" ").concat(opponentUser.getName()));
                 }
             });
@@ -69,7 +69,6 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
                 @Override
                 public void onCompleted(User user) {
                     opponentUser = user;
-                   // messageAdapter.setUser(opponentUser);
                     setTitle(getString(R.string.userIsMessageSenderHeader).concat(" ").concat(opponentUser.getName()));
                 }
             });
@@ -85,23 +84,19 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
                 }
             }
         });
-
     }
 
-    private void sendMessage(String message) {
-        FirestoreHelper.sendMessage(message, conversationRef, new FirestoreHelper.SendMessageCallback() {
+    private void sendMessage(String messageText) {
+        FirestoreHelper.sendMessage(messageText, conversationRef, new FirestoreHelper.SendMessageCallback() {
             @Override
-            public void onMessageSentSuccessfully() {
+            public void onMessageSentSuccessfully(Message message) {
                 sending = false;
             }
         });
     }
 
     private boolean isMessageValid() {
-        if (messageEditText.getText().toString().isEmpty())
-            return false;
-
-        return true;
+        return !messageEditText.getText().toString().isEmpty();
     }
 
     @Override

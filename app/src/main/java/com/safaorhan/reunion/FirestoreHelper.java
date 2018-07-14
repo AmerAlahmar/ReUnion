@@ -108,7 +108,7 @@ public class FirestoreHelper {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        callback.onMessageSentSuccessfully();
+                                        callback.onMessageSentSuccessfully(message);
                                     }
                                 });
                     }
@@ -182,8 +182,16 @@ public class FirestoreHelper {
         });
     }
 
+    public static void messageDelivered(Message message, String messageId) {
+        if (!message.getFrom().getId().equals(getMe().getId()))
+        FirebaseFirestore.getInstance()
+                .collection("messages")
+                .document(messageId).update("delivered", true);
+    }
+
+
     public interface SendMessageCallback {
-        void onMessageSentSuccessfully();
+        void onMessageSentSuccessfully(Message message);
     }
 
     public interface DocumentReferenceCallback {

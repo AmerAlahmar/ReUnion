@@ -44,7 +44,7 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
             conversationAdapter = ConversationAdapter.get(this, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(conversationAdapter);
-            recyclerView.setVisibility(View.VISIBLE);//TODO: DELETE THIS
+            recyclerView.setVisibility(View.VISIBLE);
         } else {
             haveNetwork = false;
             errorHolderTextView.setText(getString(R.string.noInternetConnectionError));
@@ -72,7 +72,8 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
     @Override
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.VISIBLE);
+        if (haveNetwork)
+            progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override

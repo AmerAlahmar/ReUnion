@@ -8,6 +8,7 @@ public class Message {
     private DocumentReference conversation;
     private DocumentReference from;
     private String text;
+    private boolean delivered;
     @ServerTimestamp
     private Timestamp sentAt;
 
@@ -42,4 +43,13 @@ public class Message {
     public void setSentAt(Timestamp sentAt) {
         this.sentAt = sentAt;
     }
+
+    public boolean getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
 }
