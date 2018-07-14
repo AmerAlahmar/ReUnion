@@ -30,5 +30,28 @@
             style="@style/secondaryTextStyle"
             tools:text="Now, can you do a successful gradle build?"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            >
+            <ImageView
+                android:id="@+id/sentImageView"
+                android:layout_width="@dimen/itemMessageTickDimens"
+                android:layout_height="@dimen/itemMessageTickDimens"
+                android:src="@drawable/ic_action_tick"
+                android:contentDescription="@string/itemMessageMessageSentTick"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/deliveredImageView"
+                android:layout_width="@dimen/itemMessageTickDimens"
+                android:layout_height="@dimen/itemMessageTickDimens"
+                android:src="@drawable/ic_action_tick"
+                android:contentDescription="@string/itemMessageMessageSentTick"
+                android:visibility="gone"
+                />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
