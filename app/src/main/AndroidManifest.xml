@@ -3,6 +3,7 @@
     package="com.safaorhan.reunion">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +16,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,5 +30,9 @@
             android:name=".activity.UsersActivity"
             android:label="@string/usersActivityLabel" />
         <activity android:name=".activity.MessageActivity" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
+
 </manifest>

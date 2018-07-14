@@ -16,9 +16,13 @@
     <dimen name="secondarySpacingExtra">6sp</dimen>
     <dimen name="secondaryTextSize">14sp</dimen>
     <dimen name="activityLoginEmailEditTextBottomMargin">16dp</dimen>
+    <dimen name="activitySignUpEmailEditTextBottomMargin">10dp</dimen>
     <dimen name="activityLoginPasswordEditTextBottomMargin">31dp</dimen>
     <dimen name="activityLoginLogoBottomMargin">42dp</dimen>
+    <dimen name="activitySignUpLogoBottomMargin">42dp</dimen>
     <dimen name="messageItemLayoutPadding">12dp</dimen>
     <dimen name="messageItemLayoutMargin">12dp</dimen>
     <dimen name="itemMessageTickDimens">15dp</dimen>
+    <dimen name="activityLoginLoginBottomMarginBottom">25dp</dimen>
+    <dimen name="activityLoginRegisterInvitationMarginBottom">5dp</dimen>
 </resources>

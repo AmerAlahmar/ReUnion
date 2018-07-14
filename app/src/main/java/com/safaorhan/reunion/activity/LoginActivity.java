@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailEdit;
     EditText passwordEdit;
     Button loginButton;
+    Button signUpButton;
     boolean isTryingToLogin = false;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -37,13 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         emailEdit = findViewById(R.id.emailEdit);
         passwordEdit = findViewById(R.id.passwordEdit);
         loginButton = findViewById(R.id.loginButton);
+        signUpButton = findViewById(R.id.signUpButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NetworkInfo networkInfo = getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
-                    Boolean emailValidation = isEmailValid(emailEdit);
-                    Boolean passwValidation = isPasswValid(passwordEdit);
+                    boolean emailValidation = isEmailValid(emailEdit);
+                    boolean passwValidation = isPasswValid(passwordEdit);
                     if (emailValidation && passwValidation)
                         if (!isTryingToLogin) {
                             tryToLogIn();
@@ -65,6 +67,14 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 passwordEdit.setError(null);
                 return false;
+            }
+        });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
             }
         });
     }
