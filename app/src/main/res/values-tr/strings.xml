@@ -4,4 +4,23 @@
     <string name="loginEmailHint">E-Posta</string>
     <string name="loginPasswordHint">Şifre</string>
     <string name="loginButtonText">Giriş yap</string>
+    <string name="menu_people">ınsanlar</string>
+    <string name="missingLastMessageReplacerText">bir şey yaz sana!</string>
+    <string name="sendMessageButtonDescription">gönder</string>
+    <string name="logoImageDescription">ReUnion logo</string>
+    <string name="conversationActivityLabel">konuşmalar</string>
+    <string name="usersActivityLabel">ınsanlar</string>
+    <string name="loginActivityEmptyEmailError">E-posta boş brıakma lütfen </string>
+    <string name="loginActivityNotValidEmailError">E-posta yanlıs girdiniz</string>
+    <string name="loginActivityEmptyPasswordError">parola boş bırakma</string>
+    <string name="loginActivityNotValidPasswordError">6 karakter veya daha fazla olmalı</string>
+    <string name="noInternetConnectionError">lütfen internet bağlantısını kontrol edin!</string>
+    <string name="loginActivityBadCredentialsError">Yanlış kullanıcı adı veya parola</string>
+    <string name="messagingEditTextHint">yazıyor…</string>
+    <string name="coloredCircleImageViewDescription">Kullanıcıyı tanımlamak için renkli daire</string>
+    <string name="meIsMessageSender">Sen:</string>
+    <string name="userIsMessageSenderHeader">İle sohbet et</string>
+    <string name="conversationActivityEmptyListError">Haydi! \ Henüz kimseye mesaj atmadın! \ Burada harika çocuklar var!</string>
+    <string name="userActivityMeName">harika sen</string>
+
 </resources>

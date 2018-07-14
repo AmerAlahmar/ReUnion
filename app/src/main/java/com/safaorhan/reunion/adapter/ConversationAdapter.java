@@ -124,6 +124,8 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
             opponentNameText = itemView.findViewById(R.id.opponentNameText);
             lastMessageText = itemView.findViewById(R.id.lastMessageText);
             coloredCircleImageView = itemView.findViewById(R.id.coloredCircleImageView);
+            // implement an image
+
         }
         private void bind(final Conversation conversation) {
             itemView.setVisibility(View.GONE);
@@ -153,6 +155,7 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
                                         lastMessageText.setText(lastMessage.getText());
                                         itemView.setVisibility(View.VISIBLE);
                                         getDataChangedListener().doWhenDataIsViable();
+
                                     }
                                 }
                             });
