@@ -21,6 +21,7 @@ import com.safaorhan.reunion.adapter.ConversationAdapter;
 import com.safaorhan.reunion.model.Conversation;
 
 public class ConversationsActivity extends AppCompatActivity implements ConversationAdapter.ConversationClickListener, ConversationAdapter.DataChangedListener {
+    private static final String TAG = ConversationsActivity.class.getSimpleName();
     RecyclerView recyclerView;
     ConversationAdapter conversationAdapter;
     TextView errorHolderTextView;
@@ -35,10 +36,17 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
         recyclerView = findViewById(R.id.recyclerView);
         errorHolderTextView = findViewById(R.id.errorHolderTextView);
         progressBar = findViewById(R.id.progressBar);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        NetworkInfo networkInfo = getActiveNetworkInfo();
+
         recyclerView.setVisibility(View.GONE);
         errorHolderTextView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
-        NetworkInfo networkInfo = getActiveNetworkInfo();
+
         if (networkInfo != null && networkInfo.isConnected()) {
             haveNetwork = true;
             conversationAdapter = ConversationAdapter.get(this, this);
@@ -53,11 +61,6 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
             errorHolderTextView.setVisibility(View.VISIBLE);
         }
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         if (haveNetwork)
             conversationAdapter.startListening();
     }
@@ -69,12 +72,6 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
             conversationAdapter.stopListening();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (haveNetwork)
-            progressBar.setVisibility(View.VISIBLE);
-    }
 
     @Override
     public void onConversationClick(final DocumentReference conversationRef) {

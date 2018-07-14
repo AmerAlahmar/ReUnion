@@ -22,4 +22,13 @@
     <string name="conversationActivityEmptyListError">Come on!\nYou haven\'t texted anyone yet!\nThere are some cool guys here !</string>
     <string name="userActivityMeName">Awesome You</string>
     <string name="itemMessageMessageSentTick">Message sent tick</string>
+    <string name="activityLoginRegisterInvitation">Don\'t have account yet?</string>
+    <string name="signUpButtonText">Sign Up</string>
+    <string name="loginFirstNameHint">First name</string>
+    <string name="loginLastNameHint">Last name</string>
+    <string name="signUpActivityEmptyNameError">First and Last Name can\'t be empty</string>
+    <string name="signUpActivityTooShortNameError">First and Last name must be at least 3 letters</string>
+    <string name="AtoZ">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="signUpActivityHaveSpaceNameError">First an Last Names can\'t have spaces</string>
+    <string name="ErrorWhileTryingToSignUp">Couldn\'t signUp, please try agine later.</string>
 </resources>

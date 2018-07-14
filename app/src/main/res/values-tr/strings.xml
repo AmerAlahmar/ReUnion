@@ -20,7 +20,6 @@
     <string name="coloredCircleImageViewDescription">Kullanıcıyı tanımlamak için renkli daire</string>
     <string name="meIsMessageSender">Sen:</string>
     <string name="userIsMessageSenderHeader">İle sohbet et</string>
-    <string name="conversationActivityEmptyListError">Haydi! \ Henüz kimseye mesaj atmadın! \ Burada harika çocuklar var!</string>
+    <string name="conversationActivityEmptyListError">Haydi!\n Henüz kimseye mesaj atmadın!\n Burada harika çocuklar var!</string>
     <string name="userActivityMeName">harika sen</string>
-
 </resources>

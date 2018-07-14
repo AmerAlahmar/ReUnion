@@ -9,23 +9,22 @@
     android:orientation="vertical"
     android:paddingEnd="@dimen/activityLoginLayoutPadding"
     android:paddingStart="@dimen/activityLoginLayoutPadding"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.SignUpActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activityLoginLogoBottomMargin"
+        android:layout_marginBottom="@dimen/activitySignUpLogoBottomMargin"
         android:adjustViewBounds="true"
+        android:scaleType="centerInside"
         android:contentDescription="@string/logoImageDescription"
         android:src="@drawable/logo" />
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activityLoginEmailEditTextBottomMargin"
+        android:layout_marginBottom="@dimen/activitySignUpEmailEditTextBottomMargin"
         android:theme="@style/loginWidgetEditTextStyle"
         app:hintEnabled="false">
-
         <EditText
             android:id="@+id/emailEdit"
             style="@style/loginEditTextStyle"
@@ -37,14 +36,12 @@
             android:maxLines="1"
             tools:text="crazy_boy34" />
     </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activityLoginPasswordEditTextBottomMargin"
+        android:layout_marginBottom="@dimen/activitySignUpEmailEditTextBottomMargin"
         android:theme="@style/loginWidgetEditTextStyle"
         app:hintEnabled="false">
-
         <EditText
             android:id="@+id/passwordEdit"
             style="@style/loginEditTextStyle"
@@ -55,21 +52,40 @@
             android:maxLength="24"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/loginButton"
-        style="@style/loginButtonStyle"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activityLoginLoginBottomMarginBottom"
-        android:text="@string/loginButtonText" />
-    <TextView
-        style="@style/secondaryTextStyle"
+        android:layout_marginBottom="@dimen/activitySignUpEmailEditTextBottomMargin"
+        android:theme="@style/loginWidgetEditTextStyle"
+        app:hintEnabled="false">
+        <EditText
+            android:id="@+id/firstNameEdit"
+            style="@style/loginEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginFirstNameHint"
+            android:inputType="textPersonName"
+            android:digits="@string/AtoZ"
+            android:maxLength="24"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activityLoginRegisterInvitationMarginBottom"
-        android:text="@string/activityLoginRegisterInvitation"
-        />
+        android:layout_marginBottom="@dimen/activitySignUpEmailEditTextBottomMargin"
+        android:theme="@style/loginWidgetEditTextStyle"
+        app:hintEnabled="false">
+        <EditText
+            android:id="@+id/lastNameEdit"
+            style="@style/loginEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginLastNameHint"
+            android:inputType="textPersonName"
+            android:digits="@string/AtoZ"
+            android:maxLength="24"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/signUpButton"
         style="@style/loginButtonStyle"
